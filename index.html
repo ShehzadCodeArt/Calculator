@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +9,24 @@
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- google icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100,0,0" />
 </head>
-<body>
+
+<body class="" >
     <h1>Simple Calculator</h1>
     <div class="container">
-        
         <div class="row">
             <div class="input-area">
-                <!-- <input class="input" data-current-operand type="text" placeholder="0"  maxlength="15"> -->
+                <div class="error-message" data-error-message></div>
                 <div class="label" data-previous-operand></div>
                 <div class="input" data-current-operand id="input"></div>
                 <div class="icons-section">
-                    <!-- <i class="fa-regular fa-clock"></i> -->
-                    <span class="icons"><i class='bx bx-time' ></i></span>
-                    <span class="icons"><i class='bx bx-ruler' ></i></span>
-                    <span class="icons"><span data-delete class="material-symbols-outlined" id="deletebtn">
-                        backspace
-                        </span></i></span>
-                    <!-- <i class="fa-solid fa-delete-left"></i>  -->
-                    
+                    <span class="icons" id="darkModeToggle" data-toggle><i class='bx bxs-moon'></i></span>
+                    <!-- <span class="icons"><i class='bx bx-time'></i></span>
+                    <span class="icons"><i class='bx bx-ruler'></i></span> -->
+                    <span class="icons"><span data-delete class="material-symbols-outlined"
+                            id="deletebtn">backspace</span></i></span>
                 </div>
             </div>
             <button data-all-clear class="button orange">C</button>
@@ -50,24 +49,16 @@
             <button data-number class="button">0</button>
             <button data-number class="button">.</button>
             <button data-equals class="button equals">=</button>
-    
-            <!-- <button data-delete>DEL</button>
-
-            <button data-operation>÷</button>
-            
-            <button data-operation>*</button>
-            
-            <button data-operation>+</button>
-            
-            <button data-operation>-</button>
-            
-            <button data-equals class="span-two">=</button> -->
         </div>
+        <div class="history">
+            <h2>History</h2>
+            <ul id="history-list"></ul>
+          </div>
+          
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
     </div>
     <script src="script.js"></script>
-    <!-- BoxIcon Icons -->
-    <!-- <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> -->
-    <!-- Font Awesome Icons-->
-    <script src="https://kit.fontawesome.com/8aac40fd6c.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
