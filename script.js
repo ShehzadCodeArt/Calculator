@@ -2,39 +2,34 @@
 const history = [];
 
 // Maximum number of history entries to keep
-const maxHistoryEntries = 2;
+const maxHistoryEntries = 10;
 
 // Function to update the history
 function updateHistory(operation, result) {
-  history.push({ operation, result });
-  // Limit the history to a certain number of entries (e.g., 10)
-    // if (history.length > 2) {
-    //     console.log(history);
-    //     history.shift(); // Remove the oldest entry
-    //     console.log(history);
-    // }
+    history.push({ operation, result });
+
+    // Limit the history to a certain number of entries (e.g., 10)
     if (history.length > maxHistoryEntries) {
         history.splice(0, history.length - maxHistoryEntries); // Remove older entries
     }
-    
-    console.log(history);
+
     // Update the history list in the HTML
     const historyList = document.getElementById('history-list');
     historyList.innerHTML = ''; // Clear the history list
 
     // Re-populate the history list with the updated entries
-  for (const entry of history) {
-    const listItem = document.createElement('li');
-    listItem.innerHTML = `${entry.operation} = ${entry.result}`;
-    historyList.appendChild(listItem);
+    for (const entry of history) {
+        const listItem = document.createElement('li');
+        const operationText = document.createElement('span');
+        operationText.textContent = entry.operation;
+        const resultText = document.createElement('span');
+        resultText.textContent = ` = ${entry.result}`;
+        resultText.style.color = 'var(--fore-color-green)'; // Set the result text color to white
+        listItem.appendChild(operationText);
+        listItem.appendChild(resultText);
+        historyList.appendChild(listItem);
     }
-    
-    // const listItem = document.createElement('li');
-    // listItem.innerHTML = `${operation} = ${result}`;
-    // historyList.appendChild(listItem);
-    // console.log(history);
 }
-
 
 class Calculator {
     constructor(previousOperandTextElement, currentOperandTextElement) {
@@ -109,18 +104,23 @@ class Calculator {
                 }
                 break
             case '%':
-                computation = (prev * current) / 100
+                if (prev !== null && current !== null) {
+                    computation = prev * (current / 100);
+                }
+                break
+            case 'xⁿ':
+                computation = prev ** current
                 break
             default:
                 return
         }
+
         // Update the history
         updateHistory(`${prev} ${this.operation} ${current}`, computation);
 
         this.currentOperand = computation
         this.operation = undefined
         this.previousOperand = ''
-        
     }
 
     // Format the number for display with commas and decimal points
@@ -164,19 +164,27 @@ class Calculator {
         errorMessageElement.style.display = 'none'; // Hide the error message element
         errorMessageElement.innerText = '';
     }
+
+    // Switch Dark Mode
     darkMode() {
         const toggleBtnIcon = document.querySelector('#darkModeToggle i')
         const body = document.querySelector('body');
         // toggleMode
         body.classList.toggle('dark-mode')
         const isOpen = body.classList.contains('dark-mode')
-        // console.log(toggleBtnIcon)
         toggleBtnIcon.classList = isOpen
-            ? 'bx bxs-sun'
-            : 'bx bxs-moon'
+            ? 'bx bxs-moon'
+            : 'bx bxs-sun'
+    }
+
+    //History Display Function
+    toggleHistory() {
+        const historySection = document.getElementById('history-section');
+        historySection.classList.toggle('open')
     }
 }
 
+const historyToggleButton = document.getElementById('history-toggle-button');
 const toggleMode = document.querySelector('[data-toggle]');
 const errorMessageElement = document.querySelector('[data-error-message]');
 const numberButtons = document.querySelectorAll('[data-number]')
@@ -223,8 +231,12 @@ deleteButton.addEventListener('click', button => {
     calculator.updateDisplay()
 })
 
+// Event listener for toggle button
 toggleMode.addEventListener('click', button => {
     calculator.darkMode()
 })
 
-
+// Event listener for History button
+historyToggleButton.addEventListener('click', button => {
+    calculator.toggleHistory()
+})
