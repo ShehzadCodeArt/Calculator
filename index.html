@@ -6,31 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
+
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <!-- google icons -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100,0,0" />
 </head>
 
-<body class="" >
+<body class="">
     <h1>Simple Calculator</h1>
     <div class="container">
         <div class="row">
+            <!-- Input Tab  -->
             <div class="input-area">
+                <!-- To Display Error for Divisible by Zero -->
                 <div class="error-message" data-error-message></div>
+
+                <!-- Display Section -->
                 <div class="label" data-previous-operand></div>
                 <div class="input" data-current-operand id="input"></div>
+
+                <!-- Icons Section -->
                 <div class="icons-section">
-                    <span class="icons" id="darkModeToggle" data-toggle><i class='bx bxs-moon'></i></span>
-                    <!-- <span class="icons"><i class='bx bx-time'></i></span>
-                    <span class="icons"><i class='bx bx-ruler'></i></span> -->
-                    <span class="icons"><span data-delete class="material-symbols-outlined"
+                    <span class="icons tooltip " id="darkModeToggle" data-toggle title="Dark Mode"><i
+                            class='bx bxs-sun'></i></span>
+                    <span class="icons tooltip" id="history-toggle-button" title="Show History"><i
+                            class='bx bx-time'></i></span>
+                    <!--Funtion not added 
+                        <span class="icons"><i class='bx bx-ruler'></i></span> -->
+                    <span class="icons tooltip" title="Backspace"><span data-delete class="material-symbols-outlined"
                             id="deletebtn">backspace</span></i></span>
                 </div>
+
+                <!-- To Display History  -->
+                <div class="history" id="history-section">
+                    <h2>History</h2>
+                    <ul id="history-list">
+                    </ul>
+                </div>
             </div>
+
+            <!-- All Buttons -->
             <button data-all-clear class="button orange">C</button>
-            <button class="button green">()</button>
+            <button data-operation class="button green">xⁿ</button>
             <button data-operation class="button green">%</button>
             <button data-operation class="button green">÷</button>
             <button data-number class="button">8</button>
@@ -50,14 +70,26 @@
             <button data-number class="button">.</button>
             <button data-equals class="button equals">=</button>
         </div>
-        <div class="history">
-            <h2>History</h2>
-            <ul id="history-list"></ul>
-          </div>
-          
+
+        <!-- Features List -->
+        <div class="features">
+            <h3>List of the Main Features:</h3>
+            <ul id="features-list">
+                <li class="items"> <span class="bold" >Display Format:</span> The calculator formats numbers for easy reading. It adds commas for thousands and shows decimal points where needed.</li>
+                <li class="items"> <span class="bold" >Switching Between Themes:</span>  You can change the calculator's appearance to either light mode or dark mode.</li>
+                <li class="items"> <span class="bold" >History of Calculations:</span>  The calculator keeps a record of your past calculations.</li>
+                <li class="items"> <span class="bold" >Managing History:</span>  To prevent the history section from getting too long, the calculator limits the number of entries it stores.</li>
+                <li class="items"> <span class="bold" >Error Messages:</span>  If you try to divide by zero, the calculator will display an error message to let you know there's a problem.</li>
+                <li class="items"> <span class="bold" >Additional Information:</span>  Icons in the calculator have tooltips that provide extra information when you hover over them.</li>
+            </ul>
+        </div>
+
+        <!-- Designs -->
         <div class="circle c1"></div>
         <div class="circle c2"></div>
     </div>
+
+    <!-- Script File -->
     <script src="script.js"></script>
 </body>
 
